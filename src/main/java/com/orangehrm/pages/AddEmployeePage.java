@@ -11,6 +11,7 @@ public class AddEmployeePage extends BasePage {
     private final By firstNameInput = By.name("firstName");
     private final By lastNameInput = By.name("lastName");
     private final By saveButton = By.cssSelector("button[type='submit']");
+    private final By formLoader = By.className("oxd-form-loader");
     private final By firstNameError =
             By.xpath("//input[@name='firstName']/ancestor::div[contains(@class,'oxd-input-group')]//span[text()='Required']");
     private final By personalDetailsHeader = By.xpath("//h6[normalize-space()='Personal Details']");
@@ -42,7 +43,9 @@ public class AddEmployeePage extends BasePage {
 
     @Step("Click Save")
     public AddEmployeePage clickSave() {
-        click(saveButton);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(formLoader));
+
+        wait.until(ExpectedConditions.elementToBeClickable(saveButton)).click();
         return this;
     }
 
@@ -57,13 +60,10 @@ public class AddEmployeePage extends BasePage {
 
     @Step("Read the created employee name from the header")
     public String getEmployeeNameHeader() {
-        // 1. التأكد من الانتقال لصفحة التفاصيل وتجاوز الـ Redirect
         waitForUrlContains("/pim/viewPersonalDetails");
 
-        // 2. انتظار إتاحة العنصر على الشاشة
         visible(employeeFullNameHeader);
 
-        // 3. انتظار أن النص لم يعد فارغاً (لتجنب Flakiness أثناء كتابة الاسم بالصفحة)
         wait.until(ExpectedConditions.attributeToBeNotEmpty(
                 driver.findElement(employeeFullNameHeader), "innerText"
         ));

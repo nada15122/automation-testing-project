@@ -34,7 +34,6 @@ public abstract class BaseTest {
         log.info("Closing driver for thread {}", Thread.currentThread().getId());
     }
 
-    /** يأخذ سكرين شوت ويرفقها مباشرة بداخل الخطوة المفتوحة */
     @Step("Capture Page Screenshot")
     @Attachment(value = "Page Screenshot", type = "image/png")
     public byte[] takeScreenshot() {

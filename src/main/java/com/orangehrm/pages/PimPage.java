@@ -47,27 +47,21 @@ public class PimPage extends BasePage {
     public PimPage searchEmployee(String employeeName) {
         WebElement input = wait.until(ExpectedConditions.elementToBeClickable(employeeNameInput));
 
-        // 1. مسح الحقل بالكامل
         input.sendKeys(Keys.CONTROL + "a");
         input.sendKeys(Keys.BACK_SPACE);
 
-        // 2. إدخال الاسم
         String firstName = employeeName.split(" ")[0];
         input.sendKeys(firstName);
 
-        // 3. اختيار من قائمة الأوتوكومبليت لو ظهرت خلال ثانيتين
         try {
             wait.withTimeout(Duration.ofSeconds(2))
                     .until(ExpectedConditions.visibilityOfElementLocated(autocompleteOption));
             click(autocompleteOption);
         } catch (Exception ignored) {
-            // الموظف غير موجود أو الأوتوكومبليت لم يظهر -> كمل سيرش عادي
         }
 
-        // 4. الضغط على زر البحث
         click(searchButton);
 
-        // 5. انتظار اختفاء اللودر لتحديث نتائج الجدول
         try {
             wait.withTimeout(Duration.ofSeconds(10))
                     .until(ExpectedConditions.invisibilityOfElementLocated(loader));

@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 
-/** Retries a failed test up to 2 extra times to reduce flaky failures. */
 public class RetryAnalyzer implements IRetryAnalyzer {
 
     private static final Logger log = LogManager.getLogger(RetryAnalyzer.class);

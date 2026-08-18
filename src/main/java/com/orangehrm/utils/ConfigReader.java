@@ -3,7 +3,6 @@ package com.orangehrm.utils;
 import java.io.InputStream;
 import java.util.Properties;
 
-/** Reads environment settings from src/test/resources/config.properties. */
 public final class ConfigReader {
 
     private static final Properties PROPERTIES = new Properties();

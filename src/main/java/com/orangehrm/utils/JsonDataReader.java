@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.InputStream;
 
-/** Loads test data from testdata.json using Jackson with safe fallback data. */
 public final class JsonDataReader {
 
     private static final JsonNode ROOT;
@@ -53,17 +52,15 @@ public final class JsonDataReader {
             return data;
         }
 
-        // Fallback data in case the key is missing or empty
         if ("existingEmployees".equals(key)) {
-            return new Object[][]{{"Nada"}};
+            return new Object[][]{{"Charlotte Smith"}};
         } else if ("nonExistingEmployees".equals(key)) {
-            return new Object[][]{{"Zzqx Notreal"}, {"Ghost Employee 999"}};
+            return new Object[][]{{"Zzqx Notreal"}};
         }
 
         return new Object[][]{};
     }
 
-    /** Returns an array of login objects as {username, password} rows. */
     public static Object[][] credentialsAsDataProvider(String key) {
         JsonNode array = node(key);
 

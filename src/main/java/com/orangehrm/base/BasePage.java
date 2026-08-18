@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-/** Shared Page Object behaviour: explicit waits and safe interactions. */
 public abstract class BasePage {
 
     protected static final Logger log = LogManager.getLogger(BasePage.class);
