@@ -3,7 +3,7 @@
 Automated UI tests for the OrangeHRM open-source demo, built with Selenium WebDriver 4, TestNG, and the Page Object Model (POM).
 
 **Site under test:** https://opensource-demo.orangehrmlive.com/web/index.php/auth/login  
-📊 **Live Allure Report:** [View Test Report Here](https://nada15122.github.io/automation-testing-project/) 
+📊 **Live Allure Report:** [View Test Report Here](https://nada15122.github.io/automation-testing-project/allure-report/)
 
 ---
 
