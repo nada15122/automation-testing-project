@@ -1,31 +1,63 @@
 # Automation Testing Project — OrangeHRM (Selenium + TestNG)
 
-Automated UI tests for the OrangeHRM open-source demo, built with Selenium WebDriver 4,
-TestNG and the Page Object Model.
+Automated UI tests for the OrangeHRM open-source demo, built with Selenium WebDriver 4, TestNG, and the Page Object Model (POM).
 
-**Site under test:** https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+**Site under test:** https://opensource-demo.orangehrmlive.com/web/index.php/auth/login  
+📊 **Live Allure Report:** [View Test Report Here](https://nada15122.github.io/automation-testing-project/) 
 
-## Tech stack
-- Java 17, Maven
-- Selenium WebDriver 4 (built-in Selenium Manager — no manual driver downloads)
-- TestNG (parallel execution, DataProviders, IRetryAnalyzer)
-- Jackson (JSON test data)
-- Log4j2 (logging to `logs/automation.log`)
-- Allure (HTML reporting)
+---
+
+## 🛠️ Tech Stack
+- **Language & Build:** Java 17, Maven
+- **Automation Framework:** Selenium WebDriver 4 (built-in Selenium Manager)
+- **Test Runner:** TestNG (Parallel Execution, DataProviders, IRetryAnalyzer)
+- **Data Parsing:** Jackson (JSON Test Data Reader)
+- **Logging:** Log4j2 (logged to `logs/automation.log`)
+- **Reporting:** Allure Reports
+
+---
 
 ## Project structure
 ```
-src/test/java/com/orangehrm
-├── base/        BaseTest (driver lifecycle), BasePage (explicit waits)
-├── pages/       LoginPage, DashboardPage, PimPage, AddEmployeePage, AdminPage
-├── tests/       LoginTests, EmployeeSearchTests, AddEmployeeTests, AdminTests, UiTests
-├── listeners/   RetryAnalyzer, RetryListener
-└── utils/       ConfigReader, JsonDataReader, DriverFactory (ThreadLocal<WebDriver>)
-src/test/resources
-├── config.properties   base.url, browser, explicit.wait, headless
-├── testdata.json       users, employee names, sidebar modules
-└── log4j2.xml
-testng.xml               parallel="tests" thread-count="3"
+automation-testing-project/
+├── allure-report/                  
+├── src/
+│   ├── main/
+│   │   └── java/
+│   │       └── com/orangehrm/
+│   │           ├── base/
+│   │           │   └── BasePage.java
+│   │           ├── pages/
+│   │           │   ├── AddEmployeePage.java
+│   │           │   ├── AdminPage.java
+│   │           │   ├── DashboardPage.java
+│   │           │   ├── LoginPage.java
+│   │           │   └── PimPage.java
+│   │           └── utils/
+│   │               ├── ConfigReader.java
+│   │               ├── DriverFactory.java
+│   │               └── JsonDataReader.java
+│   └── test/
+│       ├── java/
+│       │   └── com/orangehrm/
+│       │       ├── base/
+│       │       │   └── BaseTest.java
+│       │       ├── listeners/
+│       │       │   ├── RetryAnalyzer.java
+│       │       │   └── RetryListener.java
+│       │       └── tests/
+│       │           ├── AddEmployeeTests.java
+│       │           ├── AdminTests.java
+│       │           ├── EmployeeSearchTests.java
+│       │           ├── LoginTests.java
+│       │           └── UiTests.java
+│       └── resources/
+│           ├── config.properties   
+│           ├── log4j2.xml          
+│           └── testdata.json       
+├── pom.xml                        
+├── testng.xml                     
+└── README.md                      
 ```
 
 ## Design notes
