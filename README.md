@@ -99,7 +99,3 @@ allure generate allure-results --clean -o allure-report
 allure open allure-report
 ```
 Commit `allure-report/`; do **not** commit `allure-results/`.
-
-## Submission
-Public GitHub repo named `automation-testing-project`, link emailed to
-abdelrhman.route1@gmail.com with subject: `GP Task [Your Name] – G2`.
