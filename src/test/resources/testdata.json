@@ -1,0 +1,27 @@
+{
+  "validLogin": {
+    "username": "Admin",
+    "password": "admin123"
+  },
+  "invalidLogins": [
+    { "username": "WrongUser", "password": "wrongPass123" },
+    { "username": "Admin", "password": "badPassword" },
+    { "username": "admin!!", "password": "123" }
+  ],
+
+  "existingEmployee": {
+    "employeeName": "Charlotte Smith"
+  },
+  "nonExistingEmployee": {
+    "employeeName": "Zzqx Notreal"
+  }
+  ,
+  "newEmployee": {
+    "firstName": "John",
+    "lastName": "Doe"
+  },
+  "sidebarModules": [
+    "Admin", "PIM", "Leave", "Time", "Recruitment",
+    "My Info", "Performance", "Dashboard", "Directory"
+  ]
+}

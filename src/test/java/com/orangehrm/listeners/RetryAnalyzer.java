@@ -1,0 +1,26 @@
+package com.orangehrm.listeners;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.testng.IRetryAnalyzer;
+import org.testng.ITestResult;
+
+/** Retries a failed test up to 2 extra times to reduce flaky failures. */
+public class RetryAnalyzer implements IRetryAnalyzer {
+
+    private static final Logger log = LogManager.getLogger(RetryAnalyzer.class);
+    private static final int MAX_RETRIES = 2;
+
+    private int attempts = 0;
+
+    @Override
+    public boolean retry(ITestResult result) {
+        if (attempts < MAX_RETRIES) {
+            attempts++;
+            log.error("Test '{}' failed. Retry attempt {} of {}",
+                    result.getName(), attempts, MAX_RETRIES);
+            return true;
+        }
+        return false;
+    }
+}
