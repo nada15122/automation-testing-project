@@ -36,7 +36,9 @@ automation-testing-project/
 │   │           └── utils/
 │   │               ├── ConfigReader.java
 │   │               ├── DriverFactory.java
-│   │               └── JsonDataReader.java
+│   │               ├── JsonDataReader.java          
+                    └── AllureUtils.java
+
 │   └── test/
 │       ├── java/
 │       │   └── com/orangehrm/
