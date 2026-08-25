@@ -55,12 +55,9 @@ public class EmployeeSearchTests extends BaseTest {
         log.info("TC05 - searching for non-existing employee: {}", employeeName);
         loginWithValidUser();
 
-
         PimPage pim = new PimPage(driver)
                 .openEmployeeList()
                 .searchEmployee(employeeName);
-
-
         String resultsText = pim.getResultsText();
 
         takeScreenshot();

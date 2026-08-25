@@ -1,6 +1,7 @@
 package com.orangehrm.pages;
 
 import com.orangehrm.base.BasePage;
+import com.orangehrm.utils.AllureUtils;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -33,6 +34,7 @@ public class PimPage extends BasePage {
         click(pimSidebarLink);
         click(employeeListTab);
         visible(employeeNameInput);
+        AllureUtils.takeScreenshot(driver, "PIM Employee List Page");
         return this;
     }
 
@@ -40,6 +42,7 @@ public class PimPage extends BasePage {
     public AddEmployeePage openAddEmployee() {
         click(pimSidebarLink);
         click(addEmployeeTab);
+        AllureUtils.takeScreenshot(driver, "Navigated to Add Employee");
         return new AddEmployeePage(driver);
     }
 
@@ -54,7 +57,7 @@ public class PimPage extends BasePage {
         input.sendKeys(firstName);
 
         try {
-            wait.withTimeout(Duration.ofSeconds(2))
+            wait.withTimeout(Duration.ofSeconds(1)) // تقليل الانتظار لثانية واحدة
                     .until(ExpectedConditions.visibilityOfElementLocated(autocompleteOption));
             click(autocompleteOption);
         } catch (Exception ignored) {
@@ -63,18 +66,23 @@ public class PimPage extends BasePage {
         click(searchButton);
 
         try {
-            wait.withTimeout(Duration.ofSeconds(10))
+            wait.withTimeout(Duration.ofSeconds(3)) // تقليل انتظار اختفاء الـ loader لـ 3 ثوانٍ فقط
                     .until(ExpectedConditions.invisibilityOfElementLocated(loader));
         } catch (Exception ignored) {
         }
 
+        AllureUtils.takeScreenshot(driver, "Search Results List");
         return this;
     }
 
     @Step("Check if 'No Records Found' message is displayed")
     public boolean isNoRecordsFoundDisplayed() {
         try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(noRecordsMessage)).isDisplayed();
+            boolean isDisplayed = wait.until(ExpectedConditions.visibilityOfElementLocated(noRecordsMessage)).isDisplayed();
+            if (isDisplayed) {
+                AllureUtils.takeScreenshot(driver, "No Records Found State");
+            }
+            return isDisplayed;
         } catch (Exception e) {
             return false;
         }
@@ -91,7 +99,9 @@ public class PimPage extends BasePage {
             if (isNoRecordsFoundDisplayed()) {
                 return "No Records Found";
             }
-            return driver.findElement(resultsTable).getText();
+            String results = driver.findElement(resultsTable).getText();
+            AllureUtils.takeScreenshot(driver, "Employee Table Results");
+            return results;
         } catch (Exception e) {
             return "";
         }

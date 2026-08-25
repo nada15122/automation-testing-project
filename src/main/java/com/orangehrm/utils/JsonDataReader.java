@@ -2,11 +2,14 @@ package com.orangehrm.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.InputStream;
 
 public final class JsonDataReader {
 
+    private static final Logger log = LogManager.getLogger(JsonDataReader.class);
     private static final JsonNode ROOT;
 
     static {
@@ -17,7 +20,7 @@ public final class JsonDataReader {
                 tempRoot = new ObjectMapper().readTree(input);
             }
         } catch (Exception e) {
-            System.err.println("Warning: Could not read testdata.json. Error: " + e.getMessage());
+            log.error("Failed to read testdata.json file", e);
         }
         ROOT = tempRoot;
     }
@@ -40,7 +43,6 @@ public final class JsonDataReader {
         return "";
     }
 
-    /** Returns an array node as a TestNG DataProvider matrix of single values. */
     public static Object[][] arrayAsDataProvider(String key) {
         JsonNode array = node(key);
 
@@ -52,9 +54,9 @@ public final class JsonDataReader {
             return data;
         }
 
-        if ("existingEmployees".equals(key)) {
+        if ("existingEmployee".equals(key)) {
             return new Object[][]{{"Charlotte Smith"}};
-        } else if ("nonExistingEmployees".equals(key)) {
+        } else if ("nonExistingEmployee".equals(key)) {
             return new Object[][]{{"Zzqx Notreal"}};
         }
 

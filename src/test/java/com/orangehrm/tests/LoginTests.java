@@ -34,7 +34,9 @@ public class LoginTests extends BaseTest {
     @Story("Valid login")
     @Description("Logs in with valid credentials and verifies the dashboard is reached.")
     public void testLoginWithValidCredentials(String username, String password) {
+        log.info("========== Starting Test Case #1: Login with valid credentials ==========");
         log.info("TC01 - login with valid credentials: {}", username);
+
         DashboardPage dashboard = openLoginPage().login(username, password).waitUntilLoaded();
 
         assertTrue(dashboard.currentUrl().contains("/dashboard/index"),
@@ -45,6 +47,7 @@ public class LoginTests extends BaseTest {
     @Test(dataProvider = "invalidCredentials", description = "TC02 - Login with invalid credentials")
     @Story("Invalid login")
     public void testLoginWithInvalidCredentials(String username, String password) {
+        log.info("========== Starting Test Case #2: Login with invalid credentials ==========");
         log.info("TC02 - login with invalid credentials: {}", username);
         LoginPage loginPage = openLoginPage();
         loginPage.enterUsername(username).enterPassword(password).clickLogin();

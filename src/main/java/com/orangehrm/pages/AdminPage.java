@@ -1,6 +1,7 @@
 package com.orangehrm.pages;
 
 import com.orangehrm.base.BasePage;
+import com.orangehrm.utils.AllureUtils;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -23,6 +24,7 @@ public class AdminPage extends BasePage {
     public AdminPage openUsers() {
         click(adminSidebarLink);
         waitForUrlContains("/admin/viewSystemUsers");
+        AllureUtils.takeScreenshot(driver, "Admin Users Page");
         return this;
     }
 
@@ -30,6 +32,7 @@ public class AdminPage extends BasePage {
     public AdminPage clickAdd() {
         click(addButton);
         visible(addUserHeader);
+        AllureUtils.takeScreenshot(driver, "Add User Form");
         return this;
     }
 

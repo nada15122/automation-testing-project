@@ -32,13 +32,13 @@ public class UiTests extends BaseTest {
         String originalTab = driver.getWindowHandle();
         dashboard.clickFooterLink();
 
-        new WebDriverWait(driver, Duration.ofSeconds(15))
+        new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.numberOfWindowsToBe(2));
         List<String> handles = new ArrayList<>(driver.getWindowHandles());
         handles.remove(originalTab);
         driver.switchTo().window(handles.get(0));
 
-        new WebDriverWait(driver, Duration.ofSeconds(15))
+        new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.urlContains("orangehrm.com"));
         assertTrue(driver.getCurrentUrl().contains("orangehrm.com"),
                 "New tab URL should contain orangehrm.com but was: " + driver.getCurrentUrl());

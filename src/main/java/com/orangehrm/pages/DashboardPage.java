@@ -1,6 +1,7 @@
 package com.orangehrm.pages;
 
 import com.orangehrm.base.BasePage;
+import com.orangehrm.utils.AllureUtils;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -23,6 +24,7 @@ public class DashboardPage extends BasePage {
     public DashboardPage waitUntilLoaded() {
         waitForUrlContains("/dashboard/index");
         visible(dashboardHeader);
+        AllureUtils.takeScreenshot(driver, "Dashboard Loaded");
         return this;
     }
 
@@ -32,23 +34,28 @@ public class DashboardPage extends BasePage {
 
     @Step("Read the sidebar module names")
     public List<String> getSidebarModules() {
-        return allVisible(sidebarItems).stream().map(e -> e.getText().trim()).toList();
+        List<String> modules = allVisible(sidebarItems).stream().map(e -> e.getText().trim()).toList();
+        AllureUtils.takeScreenshot(driver, "Sidebar Modules");
+        return modules;
     }
 
     @Step("Open the {0} module from the sidebar")
     public void openModule(String moduleName) {
         click(By.xpath("//span[normalize-space()='" + moduleName + "']/ancestor::a"));
+        AllureUtils.takeScreenshot(driver, "Opened Module: " + moduleName);
     }
 
     @Step("Read the footer text")
     public String getFooterText() {
         scrollToBottom();
+        AllureUtils.takeScreenshot(driver, "Footer Text Section");
         return visible(footerText).getText().trim();
     }
 
     @Step("Click the OrangeHRM, Inc footer link")
     public void clickFooterLink() {
         scrollToBottom();
+        AllureUtils.takeScreenshot(driver, "Before Clicking Footer Link");
         click(footerLink);
     }
 }

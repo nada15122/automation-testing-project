@@ -54,14 +54,21 @@ public class AddEmployeeTests extends BaseTest {
         log.info("TC08 - creating employee {} {}", firstName, lastName);
         loginWithValidUser();
         AddEmployeePage page = new PimPage(driver).openAddEmployee();
-        page.enterFirstName(firstName).enterLastName(lastName).clickSave();
+
+        String uniqueEmpId = String.valueOf(System.currentTimeMillis()).substring(7);
+
+        page.enterFirstName(firstName)
+                .enterLastName(lastName)
+                .enterEmployeeId(uniqueEmpId)
+                .clickSave();
 
         assertTrue(page.isPersonalDetailsPageDisplayed(),
                 "Personal Details page should open for the new employee");
         assertTrue(page.getEmployeeNameHeader().contains(firstName),
                 "Employee name header should contain " + firstName);
 
-        PimPage pim = new PimPage(driver).openEmployeeList().searchEmployee(firstName + " " + lastName);
+        PimPage pim = new PimPage(driver).openEmployeeList().searchEmployee(firstName);
+
         assertTrue(pim.getResultsText().contains(lastName),
                 "The new employee should appear in the Employee List results");
     }

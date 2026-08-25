@@ -1,6 +1,7 @@
 package com.orangehrm.pages;
 
 import com.orangehrm.base.BasePage;
+import com.orangehrm.utils.AllureUtils;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,17 +23,20 @@ public class LoginPage extends BasePage {
     @Step("Enter username: {0}")
     public LoginPage enterUsername(String username) {
         type(usernameInput, username);
+        AllureUtils.takeScreenshot(driver, "Entered Username");
         return this;
     }
 
     @Step("Enter password")
     public LoginPage enterPassword(String password) {
         type(passwordInput, password);
+        AllureUtils.takeScreenshot(driver, "Entered Password");
         return this;
     }
 
     @Step("Click the Login button")
     public LoginPage clickLogin() {
+        AllureUtils.takeScreenshot(driver, "Before Clicking Login");
         click(loginButton);
         return this;
     }
@@ -47,12 +51,16 @@ public class LoginPage extends BasePage {
 
     @Step("Read the login error message")
     public String getErrorMessage() {
-        return visible(errorAlert).getText().trim();
+        String errorText = visible(errorAlert).getText().trim();
+        AllureUtils.takeScreenshot(driver, "Login Error Alert");
+        return errorText;
     }
 
     @Step("Collect the 'Required' validation messages")
     public List<String> getRequiredValidationMessages() {
-        return allVisible(requiredMessages).stream().map(e -> e.getText().trim()).toList();
+        List<String> messages = allVisible(requiredMessages).stream().map(e -> e.getText().trim()).toList();
+        AllureUtils.takeScreenshot(driver, "Required Field Validation Messages");
+        return messages;
     }
 
     public boolean isLoginButtonDisplayed() {
